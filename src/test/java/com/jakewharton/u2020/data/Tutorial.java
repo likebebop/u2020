@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.BiPredicate;
 
+import rx.Observable;
 import rx.functions.Func1;
 import rx.functions.Func2;
 
@@ -60,6 +61,19 @@ public class Tutorial {
 
         System.out.println(Dish.menu.stream().map(dish -> dish.getCalories()).reduce((a, b) -> Math.max(a, b)));
     }
+
+
+    @Test
+    public void rx1() {
+        Observable<String> o = Observable.from(Arrays.asList("soyeon", "bebop", "taeyeon", "ej"));
+
+        o.first().singleOrDefault("test").subscribe(System.out::println);
+
+        o.filter(s->s.equals("bebop2")).firstOrDefault("not found").subscribe(System.out::println);
+
+        System.out.printf("test-> %s\n", o.doOnNext(System.out::println).filter(s->s.equals("bebop2")).map(a->true).toBlocking().singleOrDefault(false));
+    }
+
 
     @Test
     public void stream() {
