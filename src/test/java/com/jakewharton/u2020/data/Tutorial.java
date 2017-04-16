@@ -1,21 +1,19 @@
 package com.jakewharton.u2020.data;
 
+import com.annimon.stream.IntStream;
 import com.annimon.stream.Optional;
 import com.annimon.stream.Stream;
 import com.annimon.stream.function.Function;
 
 import org.junit.Test;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Callable;
-import java.util.function.BiPredicate;
 
 import rx.Observable;
-import rx.functions.Func1;
 import rx.functions.Func2;
 
 import static junit.framework.Assert.assertEquals;
@@ -40,6 +38,19 @@ public class Tutorial {
     );
 
     @Test
+    public void testStream() {
+        IntStream.range(0, 10).forEach(System.out::println);
+        IntStream.rangeClosed(0, 10).forEach(System.out::println);
+        IntStream.of(1).forEach(System.out::println);
+        IntStream s = IntStream.of(1).map(operand -> 0);
+        s.boxed().forEach(System.out::println);
+
+
+        //Files.lines()
+
+    }
+
+    @Test
     public void testMatch() {
         /*System.out.printf("any match : " + Dish.menu.stream().noneMatch(new Predicate<Dish>() {
             @Override
@@ -47,6 +58,9 @@ public class Tutorial {
                 return dish.getCalories() >   800;
             }
         }));*/
+
+
+
 
         Dish.menu.stream().filter(Dish::isVegetarian).findAny().ifPresent(System.out::println);
         Dish.menu.stream().filter(Dish::isVegetarian).findFirst().ifPresent(System.out::println);
@@ -122,6 +136,22 @@ public class Tutorial {
         System.out.println(transactions.stream().map(t -> t.getValue()).reduce(Math::max));
         //System.out.println(transactions.stream().map(Transaction::getValue).reduce(Integer::max));
         System.out.println(transactions.stream().map(t -> t.getValue()).reduce((a, b) -> Math.min(a, b)));
+
+
+        System.out.println(transactions.stream().map(new java.util.function.Function<Transaction, Object>() {
+            @Override
+            public Object apply(Transaction transaction) {
+                return null;
+            }
+        }));
+
+
+        transactions.stream().flatMap(new java.util.function.Function<Transaction, java.util.stream.Stream<?>>() {
+            @Override
+            public java.util.stream.Stream<?> apply(Transaction transaction) {
+                return null;
+            }
+        });
 
 
     }
