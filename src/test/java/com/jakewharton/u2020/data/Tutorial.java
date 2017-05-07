@@ -7,6 +7,7 @@ import com.annimon.stream.function.Function;
 
 import org.junit.Test;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -37,6 +38,8 @@ public class Tutorial {
             new Transaction(alan, 2012, 950)
     );
 
+
+
     @Test
     public void testStream() {
         IntStream.range(0, 10).forEach(System.out::println);
@@ -49,6 +52,8 @@ public class Tutorial {
         //Files.lines()
 
     }
+
+
 
     @Test
     public void testMatch() {
